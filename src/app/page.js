@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 // Assure-toi que ton fichier supabaseClient a bien les clés en dur pour ce test
+// ou qu'il utilise process.env si tu as remis la sécurité
 import { supabase } from '../lib/supabaseClient';
 import { questions } from '../lib/questions';
 import confetti from 'canvas-confetti';
@@ -52,7 +53,6 @@ export default function Home() {
 
         if (error) {
             console.error("Erreur de vérification email:", error);
-            // On laisse passer en cas d'erreur réseau pour ne pas bloquer l'utilisateur honnête
         } else if (data && data.length > 0) {
             alert("⛔ ACCESS DENIED: This email address has already completed the assessment.");
             setCheckLoading(false);
@@ -90,7 +90,7 @@ export default function Home() {
         experience: candidate.experience,
         answers: answers,
         score: calcScore,
-        status: 'New'  // CORRECTION : 'status' minuscule
+        status: 'New'
     }]);
 
     if (error) {
@@ -195,7 +195,7 @@ export default function Home() {
           </div>
         )}
 
-       {/* STEP 3: RESULT (Version "Blind" - Sans la note) */}
+       {/* STEP 3: RESULT */}
         {step === 'result' && (
           <div className="text-center py-12">
             <div className="bg-green-100 text-green-700 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
@@ -215,7 +215,7 @@ export default function Home() {
                 <ul className="list-disc list-inside text-sm text-slate-600 space-y-2">
                     <li>Our recruitment team will review your answers.</li>
                     <li>We will analyze your English proficiency and tax knowledge.</li>
-                    <li>If your profile matches our requirements, we will contact you at <strong>{candidate.email}</strong> for an interview.</li>
+                    <li>If your profile matches our requirements, we will contact you at <strong>{candidate.email}</strong> for the next steps.</li>
                 </ul>
             </div>
             
@@ -224,3 +224,9 @@ export default function Home() {
             </p>
           </div>
         )}
+
+      {/* C'EST ICI QU'IL TE MANQUAIT LES BALISES DE FERMETURE ! */}
+      </div>
+    </main>
+  );
+}
