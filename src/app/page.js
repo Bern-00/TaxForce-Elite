@@ -195,24 +195,32 @@ export default function Home() {
           </div>
         )}
 
-        {/* STEP 3: RESULT */}
+       {/* STEP 3: RESULT (Version "Blind" - Sans la note) */}
         {step === 'result' && (
-          <div className="text-center py-10">
-            <h2 className="text-3xl font-bold mb-2">Assessment Completed</h2>
-            <div className="bg-slate-100 p-6 rounded-xl inline-block my-6 border">
-              <span className="block text-sm text-gray-500 uppercase">Your Score</span>
-              <span className={`text-5xl font-extrabold ${score >= 70 ? 'text-green-600' : 'text-orange-500'}`}>
-                {score}%
-              </span>
+          <div className="text-center py-12">
+            <div className="bg-green-100 text-green-700 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-10 h-10">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
             </div>
-            <p className="text-gray-600">
-                Thank you, {candidate.fullName}.<br/>
-                Our team has received your application and will review it shortly.
+
+            <h2 className="text-3xl font-bold mb-4 text-slate-800">Application Submitted</h2>
+            
+            <p className="text-lg text-slate-600 mb-8 max-w-lg mx-auto">
+                Thank you, <strong>{candidate.fullName}</strong>. Your assessment has been securely recorded.
+            </p>
+
+            <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left max-w-md mx-auto">
+                <h3 className="font-bold text-slate-700 mb-2">Next Steps:</h3>
+                <ul className="list-disc list-inside text-sm text-slate-600 space-y-2">
+                    <li>Our recruitment team will review your answers.</li>
+                    <li>We will analyze your English proficiency and tax knowledge.</li>
+                    <li>If your profile matches our requirements, we will contact you at <strong>{candidate.email}</strong> for an interview.</li>
+                </ul>
+            </div>
+            
+            <p className="mt-8 text-xs text-slate-400">
+                Window can be closed safely.
             </p>
           </div>
         )}
-
-      </div>
-    </main>
-  );
-}
